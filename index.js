@@ -10,7 +10,7 @@ app.use(express.urlencoded({ extended: true }));
 const mesaRoutes = require('./app/routes/mesa');
 const restauranteRoutes = require('./app/routes/restaurante');
 
-app.use('/mesa', mesaRoutes);
+app.use('/mesas', mesaRoutes);
 app.use('/restaurantes', restauranteRoutes);
 
 app.listen(3000, () => {

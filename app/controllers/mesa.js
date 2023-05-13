@@ -22,13 +22,12 @@ exports.getMesaById = async (req, res) => {
 }
 
 exports.addMesa = async (req, res) => {
-    const { nombre_mesa, direccion, id_restaurante, pos_x, pos_y, piso, capacidad } = req.body
+    const { nombre_mesa, id_restaurante, pos_x, pos_y, piso, capacidad } = req.body
 
     try {
         const mesa = await db.mesas.create({
         data: {
             nombre_mesa, 
-            direccion, 
             id_restaurante, 
             pos_x, 
             pos_y, 
@@ -45,14 +44,13 @@ exports.addMesa = async (req, res) => {
 
 exports.editMesa = async (req, res) => {
     const { id } = req.params
-    const {nombre_mesa, direccion, id_restaurante, pos_x, pos_y, piso, capacidad } = req.body
+    const {nombre_mesa, id_restaurante, pos_x, pos_y, piso, capacidad } = req.body
 
     try {
     const mesa = await db.mesas.update({
         where: { id: parseInt(id) },
         data: {
             nombre_mesa, 
-            direccion, 
             id_restaurante, 
             pos_x, 
             pos_y, 
