@@ -3,9 +3,18 @@ const express = require('express');
 const router = express.Router();
 
 //importar controlador
-const restauranteController = require('../controllers/mesa');
+const mesaController = require('../controllers/mesa');
 
 //GET /mesa
-router.get('/', restauranteController.getMesas);
+router.get('/', mesaController.getMesas);
+
+//POST /mesa
+router.post('/', mesaController.addMesa);
+
+//PUT /mesa/:id
+router.put('/:id', mesaController.editMesa);
+
+//DELETE /mesa/:id
+router.delete('/:id', mesaController.deleteMesa);
 
 module.exports = router;
