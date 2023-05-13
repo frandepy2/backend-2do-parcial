@@ -8,6 +8,9 @@ const mesaController = require('../controllers/mesa');
 //GET /mesa
 router.get('/', mesaController.getMesas);
 
+//PUT /mesa/:id
+router.get('/:id', mesaController.getMesaById);
+
 //POST /mesa
 router.post('/', mesaController.addMesa);
 
