@@ -6,10 +6,12 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-//importar mesas
+//importar rutas
 const mesaRoutes = require('./app/routes/mesa');
+const restauranteRoutes = require('./app/routes/restaurante');
 
 app.use('/mesa', mesaRoutes);
+app.use('/restaurantes', restauranteRoutes);
 
 app.listen(3000, () => {
     console.log('Server is running on port 3000');
