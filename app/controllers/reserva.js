@@ -85,10 +85,21 @@ exports.getReservas = async (req, res) => {
           },
           mesa: {
             select: {
+              id: true,
               nombre_mesa: true,
             },
           },
         },
+        orderBy: [
+          {
+            hora_inicio: 'asc',
+          },
+          {
+            mesa: {
+              nombre_mesa: 'asc',
+            },
+          },
+        ],
       };
   
       if (idCliente) {
@@ -105,5 +116,6 @@ exports.getReservas = async (req, res) => {
       res.status(500).json({ message: "Error al obtener las reservas." });
     }
   };
+  
   
   
