@@ -32,8 +32,8 @@ exports.getMesasDisponibles = async (req, res) => {
           hora_inicio: { gte: horaInicio }, // Compara si ya está reservada en ese rango de horario
           hora_inicio: { lte: horaFin },
           OR: [
-            { hora_fin: { gte: horaInicio } }, // Compara si la hora de inicio es mayor o igual al fin dado
-            { hora_fin: { lte: horaFin } }, // Compara si la hora de fin es menor o igual al inicio dado
+            { hora_fin: { gte: horaInicio } }, // Compara si la hora de fin es mayor o igual al inicio dado
+            { hora_fin: { lte: horaFin } }, // Compara si la hora de fin es menor o igual al fin dado
           ],
         },
       });
