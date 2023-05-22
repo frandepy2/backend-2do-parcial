@@ -7,21 +7,21 @@ exports.crearReserva = async (req, res) => {
   //Traer el restaurante por id
   const restaurante = await db.restaurante.findUnique({
     where: {
-      id: id_restaurante,
+      id: Number(id_restaurante),
     },
   });
 
   //Traer el cliente por id
   const cliente = await db.cliente.findUnique({
     where: {
-      id: id_cliente,
+      id: Number(id_cliente),
     },
   });
 
   //Traer mesa por id
   const mesa = await db.mesas.findUnique({
     where: {
-      id: id_mesa,
+      id: Number(id_mesa),
     },
   });
 
@@ -35,12 +35,12 @@ exports.crearReserva = async (req, res) => {
     // Crea la reserva
     const reserva = await db.reserva.create({
       data: {
-        restaurante: { connect: { id: id_restaurante } },
+        restaurante: { connect: { id: Number(id_restaurante) } },
         hora_inicio: new Date(hora_inicio),
         hora_fin: new Date(hora_fin),
-        cliente: { connect: { id: id_cliente } },
+        cliente: { connect: { id: Number(id_cliente) } },
         cantidad_solicitada: mesa.capacidad, // Establece el campo como nulo
-        mesa: { connect: { id: id_mesa } },
+        mesa: { connect: { id: Number(id_mesa) } },
       },
     });
 

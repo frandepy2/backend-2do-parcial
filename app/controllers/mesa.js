@@ -12,7 +12,7 @@ exports.getMesasDisponibles = async (req, res) => {
     const mesas = await db.mesas.findMany({
       where: {
         restaurante: {
-          id: idRestaurante,
+          id: Number(idRestaurante),
         },
       },
       include: {
@@ -30,9 +30,9 @@ exports.getMesasDisponibles = async (req, res) => {
         where: {
           id_mesa: mesa.id, // Compara si esta mesa ya está en reserva
           hora_inicio: { gte: horaInicio }, // Compara si ya está reservada en ese rango de horario
-          hora_inicio: { lte: horaFin },
+          hora_fin: { lte: horaFin },
           OR: [
-            { hora_fin: { gte: horaInicio } }, // Compara si la hora de fin es mayor o igual al inicio dado
+            { hora_inicio: { gte: horaInicio } }, // Compara si la hora de fin es mayor o igual al inicio dado
             { hora_fin: { lte: horaFin } }, // Compara si la hora de fin es menor o igual al fin dado
           ],
         },
