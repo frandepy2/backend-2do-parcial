@@ -7,12 +7,12 @@ exports.getMesas = async (req, res) => {
 };
 
 exports.getMesasDisponibles = async (req, res) => {
-  const { restaurante, horaInicio, horaFin } = req.params;
+  const { idRestaurante, horaInicio, horaFin } = req.params;
   try {
     const mesas = await db.mesas.findMany({
       where: {
         restaurante: {
-          nombre: restaurante,
+          id: idRestaurante,
         },
       },
       include: {
