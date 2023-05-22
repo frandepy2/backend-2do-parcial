@@ -11,6 +11,9 @@ const reservasController = require('../controllers/reserva');
 //POST /reservas
 router.post('/create', reservasController.crearReserva);
 
+//GET /mesas disponibles
+router.get('/:idRestaurante/:fecha/:idCliente?', reservasController.getReservas);
+
 
 
 module.exports = router;
