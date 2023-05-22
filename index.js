@@ -1,6 +1,11 @@
 const express = require('express');
+const morgan = require('morgan');
 
 const app = express();
+
+
+// Configura el middleware de logging
+app.use(morgan('dev')); // '
 
 //configurar json
 app.use(express.json());
