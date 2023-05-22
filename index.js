@@ -1,6 +1,27 @@
 const express = require('express');
+const swaggerJsdoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
+
 
 const app = express();
+
+// Opciones de configuración de Swagger
+    const swaggerOptions = {
+    definition: {
+        openapi: '3.0.0',
+        info: {
+        title: 'Backend 2do Parcial API DOCS',
+        version: '1.0.0',
+        },
+    },
+    apis: ['./app/routes/*.js'], // Ruta a tus archivos de rutas (puedes ajustarla según tu estructura de carpetas)
+    };
+
+    // Inicializar el generador de especificaciones Swagger
+    const swaggerSpec = swaggerJsdoc(swaggerOptions);
+
+    // Middleware para mostrar la interfaz de Swagger
+    app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 //configurar json
 app.use(express.json());

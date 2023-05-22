@@ -5,7 +5,19 @@ const router = express.Router();
 //importar controlador
 const controller = require('../controllers/cliente');
 
-//GET /cliente
+/**
+ * @swagger
+ * /cliente:
+ *   get:
+ *     summary: Obtener todos los clientes
+ *     responses:
+ *       '200':
+ *         description: Respuesta exitosa
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ */
 router.get('/', controller.getClientes);
 
 //POST /cliente
