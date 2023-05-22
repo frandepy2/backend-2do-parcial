@@ -10,7 +10,7 @@ app.use(express.urlencoded({ extended: true }));
 const mesaRoutes = require('./app/routes/mesa');
 const restauranteRoutes = require('./app/routes/restaurante');
 const clienteRoutes = require('./app/routes/cliente');
-const reservaRoutes = require('./app/routes/reservas');
+const reservaRoutes = require('./app/routes/reserva');
 
 app.use('/mesas', mesaRoutes);
 app.use('/restaurantes', restauranteRoutes);
