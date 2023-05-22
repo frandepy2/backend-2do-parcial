@@ -8,6 +8,9 @@ const mesaController = require('../controllers/mesa');
 //GET /mesa
 router.get('/', mesaController.getMesas);
 
+//GET /mesas disponibles
+router.get('/:idRestaurante/:horaInicio/:horaFin', mesaController.getMesasDisponibles);
+
 //GET /mesa/:id
 router.get('/:id', mesaController.getMesaById);
 
