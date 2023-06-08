@@ -52,3 +52,8 @@ model Reserva {
   id_cliente          Int
   cantidad_solicitada Int
 }
+
+model Categoria {
+  id       Int       @id @default(autoincrement())
+  nombre   String
+}
