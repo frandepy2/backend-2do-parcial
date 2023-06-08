@@ -56,4 +56,13 @@ model Reserva {
 model Categoria {
   id       Int       @id @default(autoincrement())
   nombre   String
+  Producto  Producto[]
+}
+
+model Producto {
+  id                  Int         @id @default(autoincrement())
+  nombre              String
+  categoria           Categoria     @relation(fields: [id_categoria], references: [id])
+  id_categoria        Int
+  precio             Int
 }
