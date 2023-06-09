@@ -21,6 +21,7 @@ const clienteRoutes = require('./app/routes/cliente');
 const reservaRoutes = require('./app/routes/reserva');
 const categoriaRoutes = require('./app/routes/categoria');
 const productoRoutes = require('./app/routes/producto');
+const consumoRoutes = require('./app/routes/consumo');
 
 app.use('/mesas', mesaRoutes);
 app.use('/restaurantes', restauranteRoutes);
@@ -28,6 +29,7 @@ app.use('/clientes', clienteRoutes);
 app.use('/reservas', reservaRoutes);
 app.use('/categoria', categoriaRoutes);
 app.use('/producto', productoRoutes);
+app.use('/consumo', consumoRoutes);
 
 app.listen(3000, () => {
     console.log('Server is running on port 3000');
