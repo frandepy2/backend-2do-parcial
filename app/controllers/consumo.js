@@ -59,7 +59,6 @@ exports.changeCustomer = async (req,res) => {
     }
 }
 
-//Controlador que crea un detalle y agrege a la cabecera, tambien suma al total
 exports.createDetail = async (req, res) => {
     try {
         const { id_cabecera } = req.params;
@@ -140,6 +139,68 @@ exports.deleteDetail = async (req, res) => {
         res.status(500).json({ error: "Error al eliminar el detalle" });
     }
 };
+
+//Controlador para devolver los datos completos de la cabecera
+exports.getConsumoByIdMesa = async (req,res) => {
+    try {
+        const { id_mesa } = req.params;
+
+        //Buscamos una cabecera por id_mesa donde el estado del consumo sea 'ABIERTO'
+        const cabecera = await db.cabecera.findFirst({
+            where: {
+                id_mesa: Number(id_mesa),
+                estado:  Estado.ABIERTO,
+            },
+        });
+
+        if (!cabecera) {
+            return res.status(404).json({ mensaje: "Cabecera no encontrada" });
+        }
+
+        //Agregar a la cabecera a partir del cliente que trae
+
+        const cliente = await db.cliente.findUnique({
+            where : {
+                id : Number(cabecera.id_cliente)
+            }
+        })
+
+        if (!cliente) {
+            return res.status(404).json({ mensaje: "Cliente no encontrado" });
+        }
+
+
+        //Traemos una lista de todos los detalles de la cabecera
+        var detalles = await db.detalle.findMany({
+            where: { id_cabecera: Number(cabecera.id) },
+        });
+
+        if (!detalles) {
+            return res.status(404).json({ mensaje: "No se encontro ni un detalle" });
+        }
+
+        var detallesProducto = [];
+        while (detalles.length !== 0){
+            var detalleActual = detalles.pop();
+            const productoDetalle = await db.producto.findUnique({
+                where: { id: Number(detalleActual.id_producto) },
+            })
+            detalleActual.producto = productoDetalle;
+            detallesProducto.push(detalleActual)
+        }
+
+        const data = {
+            cabecera,
+            cliente: cliente,
+            detalles : detallesProducto
+        }
+
+        res.status(200).json({data : data});
+    }catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Error al obtener el consumo" });
+    }
+}
 
 const Estado = {
     ABIERTO: 'ABIERTO',
