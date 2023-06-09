@@ -28,6 +28,7 @@ model Mesas {
   piso           Int         @default(1)
   capacidad      Int
   Reserva        Reserva[]
+  Cabecera Cabecera[]
 }
 
 model Cliente {
@@ -36,6 +37,7 @@ model Cliente {
   nombre   String
   apellido String
   Reserva  Reserva[]
+  Cabecera Cabecera[]
 }
 
 // archivo: reserva.prisma
@@ -64,5 +66,28 @@ model Producto {
   nombre              String
   categoria           Categoria     @relation(fields: [id_categoria], references: [id])
   id_categoria        Int
-  precio             Int
+  precio              Int
+  Detalle            Detalle[]
+}
+
+model Cabecera {
+  id                  Int         @id @default(autoincrement())
+  mesa                Mesas       @relation(fields: [id_mesa], references: [id])
+  id_mesa             Int
+  cliente             Cliente     @relation(fields: [id_cliente], references: [id])
+  id_cliente          Int
+  estado              String
+  total               Float
+  fecha_hora_creacion DateTime
+  fecha_hora_cierre   DateTime?
+  detalles            Detalle[]
+}
+
+model Detalle {
+  id              Int       @id @default(autoincrement())
+  cabecera        Cabecera  @relation(fields: [id_cabecera], references: [id])
+  id_cabecera     Int
+  producto         Producto  @relation(fields: [id_producto], references: [id])
+  id_producto      Int
+  cantidad         Int
 }
