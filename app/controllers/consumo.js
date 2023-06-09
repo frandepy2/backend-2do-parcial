@@ -76,7 +76,7 @@ exports.createDetail = async (req, res) => {
             data: {
                 cabecera: { connect: { id: Number(id_cabecera) } },
                 producto: { connect: { id: Number(id_producto) } },
-                cantidad: cantidad,
+                cantidad: Number(cantidad),
             },
         });
 

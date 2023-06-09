@@ -56,3 +56,17 @@ exports.deleteRestaurante = async (req, res) => {
         res.status(500).json({ message: 'Error al eliminar el restaurante.' })
     }
 }
+
+exports.getMesas = async (req, res) => {
+    const { id } = req.params
+
+    db.mesas.findMany({
+        where: {
+            restaurante: {
+            id: Number(id),
+            },
+        },
+    }).then((restaurantes) => {
+        res.json(restaurantes);
+    });
+}
