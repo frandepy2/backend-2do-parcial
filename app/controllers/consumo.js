@@ -41,6 +41,24 @@ exports.close = async (req, res) => {
     }
 };
 
+//Controlador para cambiar un cliente
+exports.changeCustomer = async (req,res) => {
+    try{
+        const { id_cabecera } = req.params;
+        const {id_cliente} = req.body;
+        const cabecera = await db.cabecera.update({
+            where: { id: Number(id_cabecera) },
+            data: {
+                cliente: { connect: { id: Number(id_cliente) } },
+            }
+        });
+        res.status(201).json(cabecera);
+    }catch (error){
+        console.error(error);
+        res.status(500).json({error:'Error al cambiar el cliente'});
+    }
+}
+
 const Estado = {
     ABIERTO: 'ABIERTO',
     CERRADO: 'CERRADO',
